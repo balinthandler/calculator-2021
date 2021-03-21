@@ -1,3 +1,124 @@
-body {
+html {
 background-color: darkslategrey;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 100%;
+margin: 0;
+padding: 0;
+}
+
+#container {
+  background-color: rgba(235,245,255,0.8);
+  min-width: 400px;
+  min-height: 500px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas: 
+    "display display display display"
+    "ac pct div mult"
+    "b7 b8 b9 minus"
+    "b4 b5 b6 plus"
+    "b1 b2 b3 equals"
+    "b0 b0 dec equals";
+  gap: 0.5em;
+  padding: 1em;
+  border: none;
+  border-radius: 0.5em;
+}
+
+button {
+  all:unset;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 0.3em;
+  border: none;
+}
+button:hover{
+  background-color: lavender;
+}
+button:active{
+  background-color: white;
+  border: none;
+  box-shadow: 0px 0px 10px 2px rgba(0,40,50,0.2);
+}
+.operand{
+  background-color: seashell;
+}
+.operator{
+  background-color: rosybrown;
+}
+.clear{
+  background-color:salmon;
+}
+.decimal {
+  background-color: seashell;
+}
+#display {
+  display: flex;
+  grid-area: display;
+  background-color: seashell;
+  border-radius: 0.3em;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 3em;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 0.5em;
+}
+#buttonMult {
+  grid-area: mult;
+}
+#buttonDiv {
+  grid-area: div;
+}
+#buttonClear {
+  grid-area: ac;
+}
+#buttonPct {
+  grid-area: pct;
+}
+#buttonSub {
+  grid-area: minus;
+}
+#buttonAdd {
+  grid-area: plus;
+}
+#buttonEquals {
+  grid-area: equals;
+}
+#buttonDec {
+  grid-area: dec;
+}
+#button9 {
+  grid-area: b9;
+}
+#button8 {
+  grid-area: b8;
+}
+#button7 {
+  grid-area: b7;
+}
+#button6 {
+  grid-area: b6;
+}
+#button5 {
+  grid-area: b5;
+}
+#button4 {
+  grid-area: b4;
+}
+#button3 {
+  grid-area: b3;
+}
+#button2 {
+  grid-area: b2;
+}
+#button1 {
+  grid-area: b1;
+}
+#button0 {
+  grid-area: b0;
 }
