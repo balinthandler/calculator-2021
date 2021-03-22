@@ -31,23 +31,31 @@ function clickWatcher() {
   })
 }
 
-// Keyboard Watcher
-function keyboardWatcher() {
+// Keyboard Listener
+function keyDownHandler() {
   window.addEventListener('keydown', key => {
     const button = document.querySelector(`button[data-key="${key.keyCode}"]`);
     if (!button) return;
     console.log(button.value);
     button.classList.add('buttonactive');
-  })
+  },{once: true});
+}
+
+// Activate keyDownHandler on release
+function keyUpHandler() {
+  window.addEventListener('keyup', keyDownHandler);
+
   const buttons = document.querySelectorAll('button');
   buttons.forEach(btn => btn.addEventListener('transitionend', removeTransition));
-  
- }
+}
 
 // Remove Transition on buttons
 function removeTransition(e) {
-  this.classList.remove('buttonactive');
+  if (e.propertyName !== 'transfom'){
+    this.classList.remove('buttonactive');
+  }
 } 
 
 clickWatcher()
-keyboardWatcher();
+keyDownHandler();
+keyUpHandler();
