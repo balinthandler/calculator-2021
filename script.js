@@ -19,43 +19,48 @@ function percent(operand) {
   return operand / 100;
 }
 
-
-// Mouse Click Watcher
-function clickWatcher() {
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(button => {
-    button.addEventListener('click', event => {
-      console.log(button.value);
-      return button.value;
+// Handling mouse click and keyboard keypress
+function inputHandler() {
+  let operand = '';
+  // Mouse Click Watcher
+  function clickHandler() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+      button.addEventListener('click', event => {
+        operand = button.value;
+        return button.value;
+      })
     })
-  })
-}
-
-// Keyboard Listener
-function keyDownHandler() {
-  window.addEventListener('keydown', key => {
-    const button = document.querySelector(`button[data-key="${key.keyCode}"]`);
-    if (!button) return;
-    console.log(button.value);
-    button.classList.add('buttonactive');
-  },{once: true});
-}
-
-// Activate keyDownHandler on release
-function keyUpHandler() {
-  window.addEventListener('keyup', keyDownHandler);
-
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(btn => btn.addEventListener('transitionend', removeTransition));
-}
-
-// Remove Transition on buttons
-function removeTransition(e) {
-  if (e.propertyName !== 'transfom'){
-    this.classList.remove('buttonactive');
   }
-} 
+  
+  // Keyboard keypress listener
+  function keyDownHandler() {
+    window.addEventListener('keydown', key => {
+      const button = document.querySelector(`button[data-key="${key.keyCode}"]`);
+      if (!button) return;
+      button.classList.add('buttonactive');
+      operand = button.value;
+      return button.value;
+    },{once: true});
+  }
 
-clickWatcher()
-keyDownHandler();
-keyUpHandler();
+  // KeyUp handler, Activate keyDownHandler on release
+  function keyUpHandler() {
+    window.addEventListener('keyup', () => {
+      keyDownHandler();
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(button => {
+      button.classList.remove('buttonactive')
+
+    })
+    })
+    return operand;
+  }
+
+  // Calling Functions
+  clickHandler();
+  keyDownHandler();
+  keyUpHandler();
+}
+
+inputHandler();
