@@ -56,6 +56,8 @@ function doOperation(operand1, operator, operand2){
 function calculator() {
   let oldOperand = '';
   let newOperand = '';
+  let reOperand = '';
+  let reOperator = '';
   let operator = '';
   let toDisplay = '0';
 
@@ -120,6 +122,8 @@ function calculator() {
     if (input == 'AC') {
       newOperand = '';
       oldOperand = '';
+      reOperand = '';
+      reOperator = '';
       operator = '';
       toDisplay = '0';
     }
@@ -191,17 +195,26 @@ function calculator() {
 
     // INPUT =
     if (input == '=') {
-      if (!operator && !newOperand) {
+      
+
+      if (!operator && !newOperand && !oldOperand && oldOperand !== 0) {
         return;
-      }
-      if (!oldOperand || (operator && !newOperand)) {
+      } else if ((!oldOperand && oldOperand !== 0) || (operator && !newOperand)) {
         return;
+      } else if((oldOperand || oldOperand == 0) && !operator){
+        oldOperand = doOperation(oldOperand, reOperator, reOperand);
+        toDisplay = oldOperand;
+        console.log('fhaszom')
+
       } else {
         oldOperand = doOperation(oldOperand, operator, newOperand);
+        reOperand = newOperand.toString();
+        reOperator = operator;
         toDisplay = oldOperand;
         newOperand = '';
         operator = '';
-      }
+      
+      } 
     }
 
     // INPUT * /
@@ -265,11 +278,12 @@ function calculator() {
 
     console.log('-------------------------')
     console.log('oldOperand: ' + oldOperand)
-    console.log(oldOperand ? true : false)
+    console.log('oldOperand type: ' + typeof oldOperand)
+    console.log('reOperand: ' + reOperand)
+    console.log('reOperand type: ' + typeof reOperand)
     console.log('operator: ' + operator)
+    console.log('reOperator: ' + reOperator)
     console.log('newOperand: ' + newOperand)
-    console.log(newOperand ? true : false)
-    console.log('toDipslay: ' + toDisplay)
     console.log('-------------------------')
 
   }
